@@ -14,11 +14,7 @@ router.post(
   sectorController.createSector
 );
 
-router.get(
-  "/sectors",
-  // auth,
-  sectorController.getAllSectors
-);
+router.get("/sectors", auth, sectorController.getAllSectors);
 
 router.get("/sectors/find/:id", auth, sectorController.getJobBySector);
 
