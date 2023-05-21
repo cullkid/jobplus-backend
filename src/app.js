@@ -21,6 +21,7 @@ app.use(
   cookieSession({
     name: process.env.COOKIE_NAME,
     secret: process.env.COOKIE_SECRET,
+    keys: ['key1', 'key2'], // Replace 'key1' and 'key2' with your own secret keys
     httpOnly: true,
     sameSite: "strict",
     maxAge: 24 * 60 * 60 * 1000, // 24 hours

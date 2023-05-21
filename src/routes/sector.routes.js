@@ -10,17 +10,17 @@ const auth = require("../middleware/auth.middleware");
 router.post(
   "/sectors",
   sectorController.upload,
-  auth,
+  // auth,
   sectorController.createSector
 );
 
-router.get("/sectors", auth, sectorController.getAllSectors);
+router.get("/sectors", auth, sectorController.upload, sectorController.getAllSectors);
 
-router.get("/sectors/find/:id", auth, sectorController.getJobBySector);
+router.get("/sectors/find/:id", auth, sectorController.upload, sectorController.getJobBySector);
 
 router.get(
   "/sectors-with-categories",
-  // auth,
+  auth,
   sectorController.upload,
   sectorController.getAllSectorsWithCategories
 );

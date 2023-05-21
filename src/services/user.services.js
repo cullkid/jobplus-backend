@@ -20,7 +20,7 @@ const createUser = async ({
     throw new Error("Email already exists");
   }
 
-  //to throw error if password and confirm-password do not mactch
+  //to throw error if password and onfirm-password do not mactch
   if (password !== confirm_password) {
     throw new Error("passwords do not match");
   }
