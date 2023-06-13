@@ -1,9 +1,7 @@
 //insert profile into bd & check if user id already has profile
 const profileServices = require("../services/profile.services");
 
-// create new user profile that will send a req of wanted profile db name to be ..
-//create and send to service using body(func), then use res to return a ...
-//respond that says request was sucessful or not
+//create profile
 const createProfile = async (req, res) => {
   try {
     //sign the db name to be create into body(func), the ...req.body means shortcut to write all other profile db name to be create
@@ -19,8 +17,7 @@ const createProfile = async (req, res) => {
   }
 };
 
-//edit existdb profile and send req of profile id wanted to edit and body ..
-//wante to change with existing one and send to service
+//edit existdb profile
 const editProfile = async (req, res) => {
   try {
     const { id } = req.params; //send req of profile id to change to service
@@ -36,8 +33,21 @@ const editProfile = async (req, res) => {
   }
 };
 
+// check if a job matches the user profile
+const matchJobWithProfile = async (req, res) => {
+  try {
+    const job = req.body;
+    const isMatch = await profileServices.matchJobWithProfile(job);
+    res.status(200).send({ data: isMatch });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+console.log(isMatch);
+
 // export all the functions inside profile.controller
 module.exports = {
   createProfile,
   editProfile,
+  matchJobWithProfile,
 };

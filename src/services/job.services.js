@@ -66,13 +66,7 @@ const getAllJobsWithCompaniesAndSkills = async () => {
 
   return rows;
 };
-//  LEFT JOIN skills ON job_skills.skill_id = skills.id
-// json_agg(DISTINCT job_skills) AS jobskills,
-// LEFT JOIN job_skills ON jobs.id = job_skills.job_id
-//searching jobs with title/company name & location by importing jobreuseablequery ..
-//and added some neede query in the wereclause space allowed us to add new query ..
-//and add new params arrays where the comment[array] allows us to do so, ..
-//remeber that the type here is where it is notify, save or apply job
+
 const searchJobs = async (params) => {
   //adding params[array] that the comment[array] permited us from the jobreusablequery
   const { what, where } = params;

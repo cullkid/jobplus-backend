@@ -25,8 +25,7 @@ const createProfile = async (body) => {
   return profile.rows[0]; //return profile that is created
 };
 
-//edit profile by finding id of profile want to edit and the body we want ..
-//to edit, sent from controller
+//edit profile
 const editProfile = async (id, body) => {
   //sign in profile db name wanted to edit into body
   const { job_title, min_salary, job_type, experience, sector_id } = body;
@@ -37,8 +36,7 @@ const editProfile = async (id, body) => {
     throw new Error("Invalid id"); //return error if not exist
   }
 
-  //insert the profile db name wanted to edit to replace the profile ...
-  //we already have
+  //insert the editing profile
   const { rows: editProfile } = await db.query(
     'UPDATE "profiles" SET job_title = $1, min_salary = $2, job_type = $3, experience = $4, sector_id = $5 WHERE id = $6 RETURNING *',
     [job_title, min_salary, job_type, experience, sector_id, id]
@@ -46,8 +44,38 @@ const editProfile = async (id, body) => {
   return editProfile[0]; //return the edited profile
 };
 
+// check if a job matches the user profile
+const matchJobWithProfile = async (job) => {
+  const { job_title, min_salary, job_type, experience, sector_id, user_id } =
+    job;
+
+  const { rows: profileRows } = await db.query(
+    "SELECT * FROM profiles WHERE user_id = $1",
+    [user_id]
+  );
+
+  if (profileRows.length === 0) {
+    throw new Error("User doesn't have a profile");
+  }
+
+  const profile = profileRows[0];
+
+  if (
+    // profile.job_title === job_title &&
+    profile.min_salary <= min_salary &&
+    profile.job_type === job_type &&
+    profile.experience <= experience &&
+    profile.sector_id === sector_id
+  ) {
+    return true; // job matches the user profile
+  } else {
+    return false; // job doesn't match the user profile
+  }
+};
+
 // export all the functions inside profile.service
 module.exports = {
   createProfile,
   editProfile,
+  matchJobWithProfile,
 };

@@ -5,7 +5,8 @@ const userJobServices = require("../services/user_job.services");
 const createUserJob = async (req, res) => {
   //sending a req to the createduserjob db sending to service indivitually, and with ..
   //this the user id will be will be provide even when used only job id & type
-  const body = { ...req.body, user_id: req.user.id };
+  const body = { ...req.body, user_id: req.user.id }; //, job_id: req.jobs.id
+  console.log("body", body);
   try {
     const userJob = await userJobServices.createUserJob(body);
     res.status(201).send({

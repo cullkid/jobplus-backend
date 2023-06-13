@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const auth = async (req, res, next) => {
-  // console.log("authorization", req.headers);
   // retrieve token from headers, for browser saving token login in localhost
   const token = req.headers.authorization.replace("Bearer ", "");
 

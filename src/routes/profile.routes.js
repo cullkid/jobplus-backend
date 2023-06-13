@@ -7,6 +7,7 @@ const auth = require("../middleware/auth.middleware");
 //let it inform the frontend whenever the url in posted
 router.post("/profiles", auth, profileController.createProfile);
 router.put("/profiles/:id", auth, profileController.editProfile);
+router.post("/profiles/match", auth, profileController.matchJobWithProfile);
 
 //export router to be use in app.js
 
