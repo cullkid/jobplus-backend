@@ -1,7 +1,7 @@
 //importing functions and packages from their roots
 const db = require("../config/database");
 
-// get all jobs in each sectors with count of total jobs in each sector
+// get all jobs in each sectors
 const getAllJobsInEachSectors = async () => {
   const sectors = await db.query(
     `SELECT s.id, s.name,
@@ -15,7 +15,7 @@ const getAllJobsInEachSectors = async () => {
   return sectors.rows;
 };
 
-//get all jobs in each locations with count of total jobs in each location
+//get all jobs in each locations
 const getAllJobsInEachLocation = async () => {
   const locations = await db.query(
     `SELECT c.id, c.city, c.district, COUNT(jobs.id) AS total_jobs
@@ -27,7 +27,7 @@ const getAllJobsInEachLocation = async () => {
   return locations.rows;
 };
 
-// export all browse_by.service functions
+// export
 module.exports = {
   getAllJobsInEachSectors,
   getAllJobsInEachLocation,

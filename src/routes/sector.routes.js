@@ -3,10 +3,7 @@ const router = require("express-promise-router")();
 const sectorController = require("../controllers/sector.controller");
 const auth = require("../middleware/auth.middleware");
 
-//informing the app.js to get any file with ...
-// "/sectors" or other available url, ...
-//also include 'auth' that was imported to prevent the user ...
-//accessing the sector without either sign in or login
+//route
 router.post(
   "/sectors",
   sectorController.upload,
@@ -14,9 +11,19 @@ router.post(
   sectorController.createSector
 );
 
-router.get("/sectors", auth, sectorController.upload, sectorController.getAllSectors);
+router.get(
+  "/sectors",
+  auth,
+  sectorController.upload,
+  sectorController.getAllSectors
+);
 
-router.get("/sectors/find/:id", auth, sectorController.upload, sectorController.getJobBySector);
+router.get(
+  "/sectors/find/:id",
+  auth,
+  sectorController.upload,
+  sectorController.getJobBySector
+);
 
 router.get(
   "/sectors-with-categories",

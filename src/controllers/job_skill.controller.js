@@ -1,7 +1,7 @@
 //importing functions and packages from their roots
 const jobSkillServices = require("../services/job_skill.services");
 
-// create job skills by send body request to service, to fetch the jobskill db to be create
+// create job skills
 const createJobSkill = async (req, res) => {
   try {
     const body = req.body;
@@ -15,7 +15,7 @@ const createJobSkill = async (req, res) => {
   }
 };
 
-// get all created skills from service
+// get all created skills
 const getAllJobSkills = async (req, res) => {
   try {
     const skills = await jobSkillServices.getAllJobSkills();
@@ -42,7 +42,7 @@ const deleteJobSkill = async (req, res) => {
   }
 };
 
-// export all jobskill.controller functions
+// export
 module.exports = {
   createJobSkill,
   getAllJobSkills,

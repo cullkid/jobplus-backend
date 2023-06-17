@@ -4,7 +4,6 @@ const categoryServices = require("../services/category.services");
 // create categories
 const createCategory = async (req, res) => {
   try {
-    //send a bodey req to service containing categories db name/value to be create
     const category = await categoryServices.createCategory(req.body);
 
     return res.status(200).json({
@@ -18,7 +17,7 @@ const createCategory = async (req, res) => {
   }
 };
 
-// get created categories from services
+// get created categories
 const getAllCategories = async (req, res) => {
   try {
     const categories = await categoryServices.getAllCategories();
@@ -33,12 +32,12 @@ const getAllCategories = async (req, res) => {
   }
 };
 
-//send an edit category req to services with the category db name/value to be edit
+// edit category
 const editCategory = async (req, res) => {
   try {
     const category = await categoryServices.editCategory(
-      req.params.id, //sending the category id to be edit into service
-      req.body //sending the body/value to be replace with the old one into services
+      req.params.id,
+      req.body
     );
 
     return res.status(200).json({
@@ -52,7 +51,7 @@ const editCategory = async (req, res) => {
   }
 };
 
-//send delete category req to service with the category id to be delete
+// delete category
 const deleteCategory = async (req, res) => {
   try {
     const category = await categoryServices.deleteCategory(req.params.id);
@@ -68,7 +67,7 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-//export all category.controller functions
+//export
 module.exports = {
   createCategory,
   getAllCategories,

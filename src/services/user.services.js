@@ -28,8 +28,6 @@ const createUser = async ({
   //using bcrypt to hash the user password from showing the real passsword
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  //defining bd to "INSERT INTO" the users db and returen ..
-  // all the value and passed them in rows
   const { rows } = await db.query(
     "INSERT INTO users (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
     [first_name, last_name, email, hashedPassword]

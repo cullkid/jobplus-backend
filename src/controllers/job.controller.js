@@ -1,7 +1,9 @@
 //importing functions and packages from their roots
 const jobService = require("../services/job.services");
+const profileservices = require("../services/profile.services");
+const notificationservices = require("../services/notification.services");
 
-// create new job & request for body from service
+// create new job
 const createJob = async (req, res) => {
   try {
     const job = await jobService.createJob(req.body);
@@ -9,12 +11,14 @@ const createJob = async (req, res) => {
       message: "Job created successfully",
       data: job,
     });
+    const matchingProfiles = await profileservices.matchJobWithProfile(job);
+    await notificationservices.createNotificationJobs(matchingProfiles, job);
   } catch (err) {
     res.status(400).send(err.message);
   }
 };
 
-// get all created jobs from service
+// get all created jobs
 const getAllJobs = async (req, res) => {
   try {
     const jobs = await jobService.getAllJobs();
@@ -39,7 +43,6 @@ const getAllJobsWithCompaniesAndSkills = async (req, res) => {
 // search jobs
 const searchJobs = async (req, res) => {
   const body = { ...req.body, ...req.query, user_id: req.user.id };
-  // console.log("body", body);
   try {
     const jobs = await jobService.searchJobs(body);
     res.status(200).send(jobs);

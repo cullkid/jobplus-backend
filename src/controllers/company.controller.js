@@ -1,7 +1,7 @@
-//importing functions and packages from their roots
+//importing
 const companyServices = require("../services/company.services");
 
-// create new company db & send req to the service body(func)
+// create new company
 const createCompany = async (req, res) => {
   try {
     const company = await companyServices.createCompany(req.body);
@@ -14,7 +14,7 @@ const createCompany = async (req, res) => {
   }
 };
 
-// get all created companies sent from services
+// get all companies
 const getAllCompanies = async (req, res) => {
   try {
     const companies = await companyServices.getAllCompanies(); //wating res from service
@@ -27,7 +27,7 @@ const getAllCompanies = async (req, res) => {
   }
 };
 
-//edit created company by sending the id of company wanted to edit and body to replace old one
+//edit created company
 const editCompany = async (req, res) => {
   try {
     const company = await companyServices.editCompany(req.params.id, req.body);
@@ -40,7 +40,7 @@ const editCompany = async (req, res) => {
   }
 };
 
-// delete created company by sending the id of the company to be delete to service
+// delete created company
 const deleteCompany = async (req, res) => {
   try {
     const company = await companyServices.deleteCompany(req.params.id);
@@ -53,7 +53,7 @@ const deleteCompany = async (req, res) => {
   }
 };
 
-// export all the company.controller functions
+// export
 module.exports = {
   createCompany,
   getAllCompanies,

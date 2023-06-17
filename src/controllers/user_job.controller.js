@@ -1,11 +1,9 @@
 //importing functions and packages from their roots
 const userJobServices = require("../services/user_job.services");
 
-// create new user job & sed to service, read service for more clarification
+// create new user jobs
 const createUserJob = async (req, res) => {
-  //sending a req to the createduserjob db sending to service indivitually, and with ..
-  //this the user id will be will be provide even when used only job id & type
-  const body = { ...req.body, user_id: req.user.id }; //, job_id: req.jobs.id
+  const body = { ...req.body, user_id: req.user.id };
   console.log("body", body);
   try {
     const userJob = await userJobServices.createUserJob(body);
@@ -18,12 +16,8 @@ const createUserJob = async (req, res) => {
   }
 };
 
-// get all created user jobs in different types, read service for more clarification
+// get all created user jobs
 const getAllAvailableUserJobsByUserAndType = async (req, res) => {
-  //sending a req to the createduserjob db sending to service indivitually, and with ..
-  //this the user id will be will be provide even when used only job id & type
-  //the '...req.query' contain the 'limit' & 'offset' params passed in service, and ..
-  //we added it here to allow the frontend to use it on url by adding '?page=1&limit=10'
   const body = { ...req.body, user_id: req.user.id, ...req.query };
   try {
     const userJobs = await userJobServices.getAllAvailableUserJobsByUserAndType(
@@ -38,7 +32,7 @@ const getAllAvailableUserJobsByUserAndType = async (req, res) => {
   }
 };
 
-// delete one particuler user job, go to service for more clarification
+// delete one particuler user job
 const deleteParticularUserJob = async (req, res) => {
   try {
     const userJob = await userJobServices.deleteParticularUserJob(
@@ -55,8 +49,6 @@ const deleteParticularUserJob = async (req, res) => {
 
 // delete all user jobs by user_id and type
 const deleteAllUserJobsTypeByUserAndType = async (req, res) => {
-  //sending a req to the createduserjob db sending to service indivitually, and with ..
-  //this the user id will be will be provide even when used only job id & type
   const body = { ...req.body, user_id: req.user.id };
   try {
     const userJobs = await userJobServices.deleteAllUserJobsTypeByUserAndType(
@@ -71,7 +63,7 @@ const deleteAllUserJobsTypeByUserAndType = async (req, res) => {
   }
 };
 
-// export all user-job.controller functions
+// export
 module.exports = {
   createUserJob,
   getAllAvailableUserJobsByUserAndType,

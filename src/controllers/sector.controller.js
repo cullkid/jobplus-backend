@@ -3,7 +3,7 @@ const sectorServices = require("../services/sector.services");
 const multer = require("multer");
 const path = require("path");
 
-// create new sector(func) sent from sector.route
+// create new sector
 const createSector = async (req, res) => {
   const body = {
     name: req.body.name,
@@ -93,7 +93,7 @@ const getAllSectorsWithCategories = async (req, res) => {
 // delete a chosed id sector
 const deleteSector = async (req, res) => {
   try {
-    const { id } = req.params; //params refers to id sector resquest to delete
+    const { id } = req.params;
     const sector = await sectorServices.deleteSector(id);
     return res
       .status(200)
@@ -105,10 +105,10 @@ const deleteSector = async (req, res) => {
   }
 };
 
-// sending the db to be edit and update to the sector.service ...
+// edit sector
 const editSector = async (req, res) => {
   try {
-    const { id } = req.params; //use req.params to get the sector id to be edit
+    const { id } = req.params;
     const body = { name: req.body.name, image: req.file.filename }; //request for the db to be edit which is 'name' and 'image'
     const sector = await sectorServices.editSector(id, body); //send 'id' and 'body' to service in ohter to fetch the data from db
     return res.status(200).json({

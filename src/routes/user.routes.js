@@ -4,8 +4,8 @@ const router = require("express-promise-router")();
 //importing user.controller.js
 const userController = require("../controllers/user.controller");
 
-//send or post a users request to the controller
+//route
 router.post("/users", userController.createUser);
 
-//exporting user.route.js
+//export
 module.exports = router;

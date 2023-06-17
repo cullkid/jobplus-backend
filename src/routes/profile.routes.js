@@ -3,8 +3,7 @@ const router = require("express-promise-router")();
 const profileController = require("../controllers/profile.controller");
 const auth = require("../middleware/auth.middleware");
 
-//making a post of many url into controller and add it also to the app.js to ..
-//let it inform the frontend whenever the url in posted
+//route
 router.post("/profiles", auth, profileController.createProfile);
 router.put("/profiles/:id", auth, profileController.editProfile);
 router.post("/profiles/match", auth, profileController.matchJobWithProfile);

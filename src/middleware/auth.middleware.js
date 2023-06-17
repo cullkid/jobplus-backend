@@ -6,10 +6,10 @@ dotenv.config();
 
 const auth = async (req, res, next) => {
   // retrieve token from headers, for browser saving token login in localhost
-  const token = req.headers.authorization.replace("Bearer ", "");
+  // const token = req.headers.authorization.replace("Bearer ", "");
 
   //retrieve token from header, for postman test
-  // const token = req.session.token;
+  const token = req.session.token;
 
   if (!token) {
     return res.status(401).send({ error: "Please Authenticate" });

@@ -16,7 +16,6 @@ const createJob = async (body) => {
     category_id,
   } = body;
 
-  //insert into job db & check if the creating job db value is = the one in the job db
   const { rows } = await db.query(
     `INSERT INTO jobs (title, salary_type, salary, job_types, description, company_id, sector_id, category_id) 
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
@@ -31,10 +30,6 @@ VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
       category_id,
     ]
   );
-
-  //sending the created jon to the notification.service to check if it match a ...
-  //user profiles
-  notificationServices.sendMatchJobsToUserProfiles(rows[0]);
 
   return rows[0];
   //  return job.rows[0];
@@ -68,10 +63,9 @@ const getAllJobsWithCompaniesAndSkills = async () => {
 };
 
 const searchJobs = async (params) => {
-  //adding params[array] that the comment[array] permited us from the jobreusablequery
   const { what, where } = params;
 
-  //adding more query that the whereclause permited us from the jobreuseablequery
+  // addedquery coming from reusable job service
   const addedQuery = `
     WHERE 
     (
@@ -90,7 +84,7 @@ const searchJobs = async (params) => {
     )
   `;
 
-  //merging the imported jobreuseable query, added params, & added query to work together
+  //merging the imported jobreuseable query, added params, & added query
   const rows = jobReuseQuery(params, addedQuery, [`%${what}%`, `%${where}%`]);
 
   return rows;

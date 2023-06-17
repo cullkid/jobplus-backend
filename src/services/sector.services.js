@@ -1,11 +1,10 @@
 //importing functions and packages from their roots
 const db = require("../config/database");
 
-// create new sector(func) with arguments sen from sector.controller ...
-// then enter db value needed from db inside the argument with curly bracket
+//create sectors
 const createSector = async (body) => {
   const { name, image } = body;
-  //inserting the db values passed into the argument inside the sector db
+
   const { rows } = await db.query(
     "INSERT INTO sectors (name, image) VALUES ($1, $2) RETURNING *",
     [name, image]
@@ -76,8 +75,7 @@ const deleteSector = async (id) => {
   );
 };
 
-// edit sector by getting the id of sector wanted to edit and the ...
-// body which contain the new things you want to edit sent from controller
+// edit sector by getting the id
 const editSector = async (id, body) => {
   const { name, image } = body;
 
@@ -87,10 +85,7 @@ const editSector = async (id, body) => {
     throw new Error("Sector do not exist"); //throw this message if not exist
   }
 
-  //telling the sector id to be change to the new values that was edit and ...
-  //  changed in the the sector if the id is valid, sent from controller
   const { rows: editSector } = await db.query(
-    //signing the editsector to rows b/c we already have rows on top
     "UPDATE sectors SET name = $1, image = $2 WHERE id = $3 RETURNING *",
     [name, image, id]
   );

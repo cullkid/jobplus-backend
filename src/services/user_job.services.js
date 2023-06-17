@@ -2,12 +2,6 @@
 const db = require("../config/database");
 const { jobReuseQuery } = require("../job reuseable query/job.queries");
 
-//user jobs is when a user saved, applied and recieve a job notify that matches ...
-//the user searching job details, remeber the user created searching job details ...
-// in profile db, so now we are creating all jobs that matches the user searching ...
-// job details, we get this by the "user-id", "job-id" which  ...
-//contains the user searching job details and "type" which contain when the  ...
-//user recieve the notify or saved the job or already applied for it
 const createUserJob = async (body) => {
   const { user_id, job_id, type } = body;
 
@@ -30,15 +24,9 @@ const createUserJob = async (body) => {
   return rows[0];
 };
 
-//get all available user jobs by user id and type by importing jobreuseablequery ..
-//and added some neede query in the wereclause space allowed us to add new query ..
-//and add new params arrays where the comment[array] allows us to do so, ..
-//remeber that the type here is where it is notify, save or apply job
 const getAllAvailableUserJobsByUserAndType = async (params) => {
-  //adding params[array] that the comment[array] permited us from the jobreusablequery
   const { type, user_id } = params;
 
-  //adding more query that the whereclause permited us from the jobreuseablequery
   const addedQuery = `
     WHERE jobs.id IN (
       SELECT job_id FROM "user_jobs" WHERE user_id = $4 AND type = $5

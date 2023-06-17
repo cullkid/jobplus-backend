@@ -1,7 +1,7 @@
 //importing functions and packages from their roots
 const skillServices = require("../services/skill.services");
 
-// create new skill & send to service
+// create new skill
 const createSkill = async (req, res) => {
   try {
     const skill = await skillServices.createSkill(req.body);
@@ -14,7 +14,7 @@ const createSkill = async (req, res) => {
   }
 };
 
-// get all created skills from service
+// get all created skills
 const getAllSkills = async (req, res) => {
   try {
     const skills = await skillServices.getAllSkills();
@@ -27,7 +27,7 @@ const getAllSkills = async (req, res) => {
   }
 };
 
-// send a created skill id to service for edit
+// skill  edit
 const editSkill = async (req, res) => {
   try {
     const skill = await skillServices.editSkill(req.params.id, req.body);
@@ -53,7 +53,7 @@ const deleteSkill = async (req, res) => {
   }
 };
 
-//export all skill controller function
+//export
 module.exports = {
   createSkill,
   getAllSkills,

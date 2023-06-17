@@ -27,7 +27,6 @@ const createProfile = async (body) => {
 
 //edit profile
 const editProfile = async (id, body) => {
-  //sign in profile db name wanted to edit into body
   const { job_title, min_salary, job_type, experience, sector_id } = body;
 
   // check if profile id exists in profile db
@@ -46,31 +45,13 @@ const editProfile = async (id, body) => {
 
 // check if a job matches the user profile
 const matchJobWithProfile = async (job) => {
-  const { job_title, min_salary, job_type, experience, sector_id, user_id } =
-    job;
+  const { salary, sector_id } = job;
 
   const { rows: profileRows } = await db.query(
-    "SELECT * FROM profiles WHERE user_id = $1",
-    [user_id]
+    `SELECT * FROM profiles WHERE min_salary <= $1 AND sector_id = $2`,
+    [salary, sector_id]
   );
-
-  if (profileRows.length === 0) {
-    throw new Error("User doesn't have a profile");
-  }
-
-  const profile = profileRows[0];
-
-  if (
-    // profile.job_title === job_title &&
-    profile.min_salary <= min_salary &&
-    profile.job_type === job_type &&
-    profile.experience <= experience &&
-    profile.sector_id === sector_id
-  ) {
-    return true; // job matches the user profile
-  } else {
-    return false; // job doesn't match the user profile
-  }
+  return profileRows;
 };
 
 // export all the functions inside profile.service
