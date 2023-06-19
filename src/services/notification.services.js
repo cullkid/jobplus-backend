@@ -2,8 +2,8 @@
 const db = require("../config/database");
 
 const createNotificationJobs = async (matchingProfiles, job) => {
-  // maping through the matchingProfilles
-  const notificationJobs = matchingProfiles.map((profile) => ({
+  // maping through the matchingProfillesconst notificationJobs =
+  matchingProfiles.map((profile) => ({
     id: profile.id,
     salary: profile.min_salary,
     title: profile.job_title,
@@ -14,7 +14,7 @@ const createNotificationJobs = async (matchingProfiles, job) => {
     created_at: profile.created_at,
     updated_at: profile.updated_at,
   }));
-  console.log("matchedJobs", notificationJobs);
+  console.log("matchedJobs", matchingProfiles, job);
 
   //  const newNotificationJob = await notificationJobs.insertMany(
   //     notificationJobs
