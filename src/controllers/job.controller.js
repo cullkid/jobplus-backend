@@ -12,7 +12,15 @@ const createJob = async (req, res) => {
       data: job,
     });
     const matchingProfiles = await profileservices.matchJobWithProfile(job);
-    await notificationservices.getNotificationJobs(matchingProfiles, job);
+    const notifications = matchingProfiles.map((profile) => {
+      return {
+        job_id: job.id,
+        user_id: profile.user_id,
+        type: "Application",
+      };
+    });
+    // console.log(notifications);
+    await notificationservices.createNotificationJobs(notifications);
   } catch (err) {
     res.status(400).send(err.message);
   }
